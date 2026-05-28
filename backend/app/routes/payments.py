@@ -148,4 +148,26 @@ async def get_payment_by_order(
             status.HTTP_404_NOT_FOUND,
             "No payment found for this order. Create one via /api/payments-manual/generate-qr first.",
         )
+
+    # ── Fallback: If still pending AND has a SafePay tracker, check SafePay directly ──
+    if payment.get("status") == "pending" and payment.get("tracker_id"):
+        try:
+            from app.services.safepay_service import check_safepay_tracker_status
+            safepay_status = await check_safepay_tracker_status(payment["tracker_id"])
+            if safepay_status and safepay_status.get("state") == "PAID":
+                now = utcnow()
+                await db.payments.update_one(
+                    {"_id": payment["_id"]},
+                    {"$set": {"status": "completed", "completed_at": now}}
+                )
+                await db.orders.update_one(
+                    {"order_id": payment["order_id"]},
+                    {"$set": {"payment_status": "paid", "updated_at": now}}
+                )
+                payment["status"] = "completed"
+                payment["completed_at"] = now
+                print(f"[Fallback] Payment {payment['payment_id']} marked completed via SafePay API check")
+        except Exception as e:
+            print(f"[Fallback] SafePay check failed (non-fatal): {e}")
+
     return _stringify_id(payment)

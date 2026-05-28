@@ -69,11 +69,12 @@ async def safepay_webhook(request: Request):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, str(e))
 
     data = json.loads(payload)
+    print(f"[SafePay Webhook] Received payload: {data}")
     
-    # Check transaction status from webhook
-    # Note: the exact payload depends on Safepay's webhook format
-    tracker = data.get("tracker")
-    state = data.get("state")
+    # Safepay V2 webhooks nest the payload under a "data" object
+    payload_data = data.get("data", data)
+    tracker = payload_data.get("tracker")
+    state = payload_data.get("state")
     
     if state == "PAID" and tracker:
         db = get_database()
@@ -100,3 +101,4 @@ async def safepay_webhook(request: Request):
             )
 
     return {"received": True}
+

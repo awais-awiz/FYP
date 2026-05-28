@@ -150,6 +150,14 @@ DUMMY_MODELS = [
         "category": "Main Course",
         "description": "3D model of Beef Tenderloin Steak",
     },
+    {
+        "id": "model_19",
+        "name": "Aquafina Water",
+        "model_url": "/models/3dModels/Aquafina_Bottled_Water.glb",
+        "thumbnail_url": "/models/PosterImage/Aquafina_Water.png",
+        "category": "Beverages",
+        "description": "3D model of Aquafina Water",
+    },
 ]
 
 

@@ -60,3 +60,28 @@ def verify_safepay_webhook(payload: bytes, signature: str) -> bool:
     ).hexdigest()
     
     return hmac.compare_digest(expected_mac, signature)
+
+
+async def check_safepay_tracker_status(tracker_token: str) -> Dict[str, Any]:
+    """
+    Directly query SafePay API to check if a tracker/payment has been paid.
+    This is a fallback for when webhooks are delayed or missed.
+    """
+    url = f"{SAFEPAY_API_BASE}/order/v1/{tracker_token}"
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            response = await client.get(
+                url,
+                headers={"Authorization": f"Bearer {settings.SAFEPAY_API_KEY}"}
+            )
+            if response.status_code == 200:
+                data = response.json()
+                tracker_data = data.get("data", data)
+                # SafePay returns "TRACKER_ENDED" when payment is completed
+                state = tracker_data.get("state", "")
+                if state == "TRACKER_ENDED" and tracker_data.get("transaction"):
+                    return {"state": "PAID", "tracker": tracker_token}
+                return {"state": state, "tracker": tracker_token}
+    except Exception as e:
+        print(f"[SafePay] Status check failed: {e}")
+    return None

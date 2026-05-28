@@ -169,16 +169,6 @@ MENU_ITEMS = [
         "prep_time_minutes": 15, "spice_level": 0, "is_vegetarian": False, "is_popular": True,
     },
     {
-        "name": "Crispy Herb Fried Chicken",
-        "description": "Delicious Crispy Herb Fried Chicken",
-        "price": 1200,
-        "category": "Main Course",
-        "image_url": "/models/PosterImage/Crispy_Herb_Fried_Chicken.png",
-        "model_3d_url": "/models/3dModels/Crispy_Herb_Fried_Chicken.glb",
-        "is_available": True, "stock_quantity": 50, "allergens": [],
-        "prep_time_minutes": 15, "spice_level": 0, "is_vegetarian": False, "is_popular": True,
-    },
-    {
         "name": "Katsuobushi Poutine",
         "description": "Delicious Katsuobushi Poutine",
         "price": 1350,
@@ -297,6 +287,16 @@ MENU_ITEMS = [
         "model_3d_url": "/models/3dModels/beef_tenderloin_steak.glb",
         "is_available": True, "stock_quantity": 50, "allergens": [],
         "prep_time_minutes": 15, "spice_level": 0, "is_vegetarian": False, "is_popular": True,
+    },
+    {
+        "name": "Aquafina Water",
+        "description": "Refreshing Aquafina Bottled Water",
+        "price": 5,
+        "category": "Beverages",
+        "image_url": "/models/PosterImage/Aquafina_Water.png",
+        "model_3d_url": "/models/3dModels/Aquafina_Bottled_Water.glb",
+        "is_available": True, "stock_quantity": 50, "allergens": [],
+        "prep_time_minutes": 2, "spice_level": 0, "is_vegetarian": True, "is_popular": True,
     },
 ]
 
