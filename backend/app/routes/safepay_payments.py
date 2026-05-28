@@ -79,8 +79,6 @@ async def safepay_webhook(request: Request):
     if state == "PAID" and tracker:
         db = get_database()
         now = utcnow()
-
-
         
         # Find the payment by tracker
         payment = await db.payments.find_one({"tracker_id": tracker})
