@@ -131,13 +131,7 @@ const MenuScene = () => {
         const data = await models3dApi.list();
         if (!cancelled && data?.models?.length) {
           setModels(data.models);
-          // Silently preload models in the background
-          data.models.forEach(m => {
-            if (m.model_url) {
-              const url = resolveUrl(m.model_url);
-              if (url) useGLTF.preload(url);
-            }
-          });
+          // Removed aggressive preloading to save mobile data and prevent freezing
         }
       } catch (err) {
         console.warn("[MenuScene] Could not fetch 3D models:", err.message);
