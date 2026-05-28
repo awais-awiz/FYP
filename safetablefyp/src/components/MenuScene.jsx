@@ -113,7 +113,7 @@ const MenuScene = () => {
   const [models, setModels] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false); // Disabled by default to prevent infinite loading loop on mobile
   const [isPending, startTransition] = useTransition();
 
   // Resolve the model URL
