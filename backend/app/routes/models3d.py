@@ -55,14 +55,6 @@ DUMMY_MODELS = [
         "description": "3D model of Crispy Fried Chicken",
     },
     {
-        "id": "model_6",
-        "name": "Crispy Herb Fried Chicken",
-        "model_url": "/models/3dModels/Crispy_Herb_Fried_Chicken.glb",
-        "thumbnail_url": "/models/PosterImage/Crispy_Herb_Fried_Chicken.png",
-        "category": "Main Course",
-        "description": "3D model of Crispy Herb Fried Chicken",
-    },
-    {
         "id": "model_7",
         "name": "Katsuobushi Poutine",
         "model_url": "/models/3dModels/Katsuobushi_Poutine.glb",

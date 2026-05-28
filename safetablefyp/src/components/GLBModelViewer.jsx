@@ -73,7 +73,7 @@ const ContextGuard = () => {
       canvas.removeEventListener("webglcontextlost", handleLost);
       canvas.removeEventListener("webglcontextrestored", handleRestored);
       gl.dispose();
-      gl.forceContextLoss();
+      
     };
   }, [gl]);
 
