@@ -101,3 +101,4 @@ async def safepay_webhook(request: Request):
             )
 
     return {"received": True}
+
