@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* S.A.F.E. Table - Futuristic Dining Design System */
+
+    /* Base Colors - Deep Space Theme */
+    --background: 240 10% 4%;
+    --foreground: 200 100% 95%;
+
+    /* Card & Surface */
+    --card: 240 8% 8%;
+    --card-foreground: 200 100% 95%;
+    --card-glow: 240 8% 12%;
+
+    /* Popover */
+    --popover: 240 10% 6%;
+    --popover-foreground: 200 100% 95%;
+
+    /* Primary - Electric Blue */
+    --primary: 190 100% 50%;
+    --primary-foreground: 240 10% 4%;
+    --primary-glow: 190 100% 60%;
+
+    /* Secondary - Neon Purple */
+    --secondary: 280 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent - Cyber Green */
+    --accent: 160 100% 50%;
+    --accent-foreground: 240 10% 4%;
+
+    /* Muted */
+    --muted: 240 8% 15%;
+    --muted-foreground: 200 20% 60%;
+
+    /* Destructive */
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders & Inputs */
+    --border: 240 15% 20%;
+    --input: 240 15% 18%;
+    --ring: 190 100% 50%;
+
+    /* Radius */
+    --radius: 0.75rem;
+
+    /* Custom Design Tokens */
+    --neon-blue: 190 100% 50%;
+    --neon-purple: 280 100% 50%;
+    --neon-green: 160 100% 50%;
+    --neon-pink: 320 100% 50%;
+
+    /* Kitchen Display Colors */
+    --kitchen-bg: 217 33% 5%;
+    --kitchen-card: 217 25% 10%;
+    --kitchen-border: 217 20% 20%;
+    --kitchen-accent: 25 95% 53%;
+    /* Orange for cooking/active */
+    --kitchen-ready: 142 76% 36%;
+    /* Green for ready */
+    --kitchen-urgent: 0 84% 60%;
+    /* Red for urgent/late */
+    --kitchen-text: 0 0% 95%;
+    --kitchen-text-muted: 217 15% 65%;
+
+    /* Admin Portal Colors */
+    --admin-bg: 220 20% 8%;
+    --admin-card: 220 18% 12%;
+    --admin-border: 220 15% 22%;
+    --admin-accent: 217 91% 60%;
+    /* Professional blue */
+    --admin-text: 0 0% 95%;
+    --admin-text-muted: 220 15% 65%;
+
+    /* Status Colors (Shared across Kitchen & Admin) */
+    --status-pending: 217 91% 60%;
+    /* Blue */
+    --status-confirmed: 217 91% 60%;
+    /* Blue */
+    --status-preparing: 25 95% 53%;
+    /* Orange */
+    --status-ready: 142 76% 36%;
+    /* Green */
+    --status-completed: 220 15% 65%;
+    /* Gray */
+    --status-urgent: 0 84% 60%;
+    /* Red */
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(190 100% 50%), hsl(280 100% 50%));
+    --gradient-accent: linear-gradient(135deg, hsl(280 100% 50%), hsl(320 100% 50%));
+    --gradient-surface: linear-gradient(180deg, hsl(240 8% 10%), hsl(240 10% 6%));
+    --gradient-glow: radial-gradient(circle at center, hsl(190 100% 50% / 0.2), transparent 70%);
+
+    /* Shadows & Glows */
+    --shadow-glow-blue: 0 0 30px hsl(190 100% 50% / 0.3);
+    --shadow-glow-purple: 0 0 30px hsl(280 100% 50% / 0.3);
+    --shadow-glow-green: 0 0 30px hsl(160 100% 50% / 0.3);
+    --shadow-card: 0 8px 32px hsl(240 10% 0% / 0.5);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+}
+
+@layer utilities {
+  .glow-blue {
+    box-shadow: var(--shadow-glow-blue);
+  }
+
+  .glow-purple {
+    box-shadow: var(--shadow-glow-purple);
+  }
+
+  .glow-green {
+    box-shadow: var(--shadow-glow-green);
+  }
+
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-morphism {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  /* Premium Hover Effects */
+  .hover-glow {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_hsl(var(--primary)/0.2)] hover:border-primary/40 active:translate-y-0 active:scale-[0.98] active:shadow-[0_5px_10px_-5px_hsl(var(--primary)/0.1)];
+  }
+
+  .hover-glow-purple {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:border-purple-500/50 active:translate-y-0 active:scale-[0.98];
+  }
+
+  .hover-glow-amber {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.3)] hover:border-amber-500/50 active:translate-y-0 active:scale-[0.98];
+  }
+
+  .hover-glow-green {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(34,197,94,0.3)] hover:border-green-500/50 active:translate-y-0 active:scale-[0.98];
+  }
+
+  .hover-glow-blue {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(59,130,246,0.3)] hover:border-blue-500/50 active:translate-y-0 active:scale-[0.98];
+  }
+
+  .hover-glow-red {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(239,68,68,0.3)] hover:border-red-500/50 active:translate-y-0 active:scale-[0.98];
+  }
+
+  .hover-glow-slate {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(100,116,139,0.3)] hover:border-slate-500/50 active:translate-y-0 active:scale-[0.98];
+  }
+}
